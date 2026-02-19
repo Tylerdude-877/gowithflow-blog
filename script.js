@@ -797,10 +797,14 @@ function deleteSubscriber(subscriberId) {
 // Image Upload Functions
 let uploadedImageData = null;
 
-function showImageOption(option) {
+function showImageOption(option, clickedBtn) {
     // Update button states
     document.querySelectorAll('.upload-option-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    // Use the passed button element if available, otherwise fall back to event.target
+    var activeBtn = clickedBtn || (typeof event !== 'undefined' && event && event.target) || null;
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
 
     // Show selected option
     document.querySelectorAll('.image-option').forEach(opt => opt.classList.remove('active'));
